@@ -8,28 +8,33 @@ public class PlayerMovemement : MonoBehaviour
     [SerializeField] private GameObject _playerGraphics;
     
     private Animator _animator;
+    private int _speedAnimationHash;
     
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
+        _speedAnimationHash = Animator.StringToHash("Speed");
     }
     
     void Update()
     {
+        float animatorValue = 0f;
         if (Input.GetKey(KeyCode.D))
         {
-            _animator.SetFloat("Speed", 1.0f);
+            animatorValue = 1f;
             _playerGraphics.transform.localScale = new Vector3(1, 1, 1);
             transform.Translate(Vector3.right * (_speed * Time.deltaTime));
         } else if (Input.GetKey(KeyCode.A))
         {
-            _animator.SetFloat("Speed", 1.0f);
+            animatorValue = 1f;
             _playerGraphics.transform.localScale = new Vector3(-1, 1, 1);
             transform.Translate(Vector3.right * (-_speed * Time.deltaTime));
         }
         else
         {
-            _animator.SetFloat("Speed", -1f);
+            animatorValue = -1f;
         }
+        
+        _animator.SetFloat(_speedAnimationHash, animatorValue);
     }
 }
