@@ -6,7 +6,6 @@ public class PlayerMovemement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private GameObject _playerGraphics;
-    
     private Animator _animator;
     private int _speedAnimationHash;
     
