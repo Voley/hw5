@@ -10,13 +10,13 @@ public class PlayerMovemement : MonoBehaviour
     private Animator _animator;
     private int _speedAnimationHash;
     
-    void Start()
+    private void Start()
     {
         _animator = GetComponentInChildren<Animator>();
         _speedAnimationHash = Animator.StringToHash("Speed");
     }
     
-    void Update()
+    private void Update()
     {
         float animatorValue = 0f;
         if (Input.GetKey(KeyCode.D))

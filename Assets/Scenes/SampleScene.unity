@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 945963171}
   - component: {fileID: 945963172}
   - component: {fileID: 945963173}
+  - component: {fileID: 945963174}
   m_Layer: 0
   m_Name: Alarm
   m_TagString: Untagged
@@ -392,7 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e72fc5a53bdc47bf87b8b1717165554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _audioSource: {fileID: 0}
 --- !u!61 &945963172
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -534,6 +534,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &945963174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 945963169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5624e3d8fd5ab482194d0a7900eddaca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _audioSource: {fileID: 0}
+  _minVolume: 0
+  _maxVolume: 0.4
+  _fadeDuration: 2
 --- !u!1 &1238786423
 GameObject:
   m_ObjectHideFlags: 0
