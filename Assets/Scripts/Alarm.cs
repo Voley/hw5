@@ -8,8 +8,10 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
+    private const String PlayerTag = "Player";
+    
     private Siren _siren;
-
+    
     private void Start()
     {
         _siren = GetComponent<Siren>();
@@ -17,11 +19,17 @@ public class Alarm : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        _siren.PlayAlarm();
+        if (col.gameObject.CompareTag(PlayerTag))
+        {
+            _siren.PlayAlarm();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        _siren.StopAlarm();
+        if (other.gameObject.CompareTag(PlayerTag))
+        {
+            _siren.StopAlarm();
+        }
     }
 }

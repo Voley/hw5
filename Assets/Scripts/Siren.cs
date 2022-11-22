@@ -10,6 +10,11 @@ public class Siren : MonoBehaviour
     [SerializeField] private float _maxVolume;
     [SerializeField] private float _fadeDuration;
     
+    private void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
+    
     public void PlayAlarm()
     {
         _audioSource.Play();
@@ -19,10 +24,5 @@ public class Siren : MonoBehaviour
     public void StopAlarm()
     {
         _audioSource.DOFade(_minVolume, _fadeDuration).OnComplete(() => _audioSource.Stop());
-    }
-    
-    private void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
     }
 }
