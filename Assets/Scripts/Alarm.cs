@@ -8,8 +8,6 @@ using UnityEngine;
 
 public class Alarm : MonoBehaviour
 {
-    private const String PlayerTag = "Player";
-    
     private Siren _siren;
     
     private void Start()
@@ -19,7 +17,9 @@ public class Alarm : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.CompareTag(PlayerTag))
+        PlayerMovemement player = col.gameObject.GetComponent<PlayerMovemement>();
+        
+        if (player != null)
         {
             _siren.PlayAlarm();
         }
@@ -27,7 +27,9 @@ public class Alarm : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag(PlayerTag))
+        PlayerMovemement player = other.gameObject.GetComponent<PlayerMovemement>();
+        
+        if (player != null)
         {
             _siren.StopAlarm();
         }
