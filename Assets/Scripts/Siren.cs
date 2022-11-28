@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -11,6 +12,8 @@ public class Siren : MonoBehaviour
     [SerializeField] private float _minVolume;
     [SerializeField] private float _maxVolume;
     [SerializeField] private float _fadeDuration;
+
+    private Coroutine _soundChangeCoroutine;
     
     private void Start()
     {
@@ -19,34 +22,40 @@ public class Siren : MonoBehaviour
     
     public void PlayAlarm()
     {
-        _audioSource.Play();
-        StartCoroutine(IncreaseVolume());
+        if (!_audioSource.isPlaying)
+        {
+            _audioSource.Play();
+        }
+
+        if (_soundChangeCoroutine != null)
+        {
+            StopCoroutine(_soundChangeCoroutine);
+        }
+        
+        _soundChangeCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
     }
 
     public void StopAlarm()
     {
-        StartCoroutine(DecreaseVolume());
+        if (_soundChangeCoroutine != null)
+        {
+            StopCoroutine(_soundChangeCoroutine);
+        }
+        
+        _soundChangeCoroutine = StartCoroutine(ChangeVolume(_minVolume));
     }
 
-    private IEnumerator IncreaseVolume()
+    private IEnumerator ChangeVolume(float target)
     {
         float startVolume = _audioSource.volume;
         float rate = 1.0f / _fadeDuration;
- 
-        for (float progress = 0.0f; progress <= 1.0f; progress += Time.deltaTime * rate) {
-            _audioSource.volume = Mathf.Lerp(startVolume, _maxVolume, progress);
-            yield return null;
-        }
-    }
 
-    private IEnumerator DecreaseVolume()
-    {
-        float startVolume = _audioSource.volume;
-        float rate = 1.0f / _fadeDuration;
- 
-        for (float progress = 0.0f; progress <= 1.0f; progress += Time.deltaTime * rate) {
-            _audioSource.volume = Mathf.Lerp(startVolume, _minVolume, progress);
+        while (Math.Abs(startVolume - target) > float.Epsilon)
+        {
+            _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, Time.deltaTime * rate);
             yield return null;
         }
+
+        _soundChangeCoroutine = null;
     }
 }
