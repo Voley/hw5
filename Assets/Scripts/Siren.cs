@@ -20,7 +20,7 @@ public class Siren : MonoBehaviour
         _audioSource = GetComponent<AudioSource>();
     }
     
-    public void PlayAlarm()
+    public void IncreaseAlarmSoundOverTime()
     {
         if (!_audioSource.isPlaying)
         {
@@ -35,7 +35,7 @@ public class Siren : MonoBehaviour
         _soundChangeCoroutine = StartCoroutine(ChangeVolume(_maxVolume));
     }
 
-    public void StopAlarm()
+    public void DecreaseAlarmSoundOverTime()
     {
         if (_soundChangeCoroutine != null)
         {

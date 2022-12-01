@@ -21,7 +21,7 @@ public class Alarm : MonoBehaviour
         
         if (player != null)
         {
-            _siren.PlayAlarm();
+            _siren.IncreaseAlarmSoundOverTime();
         }
     }
 
@@ -31,7 +31,7 @@ public class Alarm : MonoBehaviour
         
         if (player != null)
         {
-            _siren.StopAlarm();
+            _siren.DecreaseAlarmSoundOverTime();
         }
     }
 }
