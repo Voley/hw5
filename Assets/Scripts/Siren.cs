@@ -47,10 +47,9 @@ public class Siren : MonoBehaviour
 
     private IEnumerator ChangeVolume(float target)
     {
-        float startVolume = _audioSource.volume;
         float rate = 1.0f / _fadeDuration;
 
-        while (Math.Abs(startVolume - target) > float.Epsilon)
+        while (_audioSource.volume != target)
         {
             _audioSource.volume = Mathf.MoveTowards(_audioSource.volume, target, Time.deltaTime * rate);
             yield return null;
